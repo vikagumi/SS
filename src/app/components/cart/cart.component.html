@@ -1,0 +1,68 @@
+<h2 class="text-center" *ngIf="cartProducts.length > 0">Your order:</h2>
+<div class="container" *ngIf="cartProducts.length > 0; else empty">
+  <div *ngFor="let product of cartProducts" class="cart-products">
+    <div class="cart-products-img">
+      <span class="delete" (click)="removeItem(product)">X</span>
+      <img src="{{product.img}}">
+    </div>
+    <div class="cart-products-info">
+      <h2>{{product.name}}</h2>
+      <h3> {{ product.price }} $ </h3>
+    </div>
+    <div class="cart-products-number">
+      <span (click)="minus(product)" >-</span>
+      <span> {{product.number}} </span>
+      <span (click)="plus(product)">+</span>
+    </div>
+  </div>
+  <strong class="left" *ngIf="totalPrice > 0">Total: {{totalPrice}} $</strong>
+  <hr>
+  <h2 class="text-center">Delivery</h2>
+  <div class="form">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="form-control">
+        <label for="name">Name</label>
+        <input id="name" type="name" formControlName="name">
+
+        <div *ngIf="form.get('name').touched && form.get('name').invalid" class="validation">
+          <small *ngIf="form.get('name').errors['required']">Enter your name</small>
+        </div>
+      </div>
+
+      <div class="form-control">
+        <label for="surname">Surname</label>
+        <input id="surname" type="surname" formControlName="surname">
+
+        <div *ngIf="form.get('surname').touched && form.get('surname').invalid" class="validation">
+          <small *ngIf="form.get('surname').errors['required']">Enter your name</small>
+        </div>
+      </div>
+
+      <div class="form-control">
+        <label for="phone">Phone number</label>
+        <input id="phone" type="phone" formControlName="phone">
+
+        <div *ngIf="form.get('phone').touched && form.get('phone').invalid" class="validation">
+          <small *ngIf="form.get('phone').errors['required']">Enter your phone number</small>
+        </div>
+      </div>
+
+      <div class="form-control">
+        <label for="address">Address</label>
+        <input id="address" type="address" formControlName="address">
+
+        <div *ngIf="form.get('address').touched && form.get('address').invalid" class="validation">
+          <small *ngIf="form.get('address').errors['required']">Enter your address</small>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="form.invalid || submitted">Buy</button>
+
+    </form>
+  </div>
+
+</div>
+
+<ng-template #empty>
+  <h2 *ngIf="!submitted" class="text-center">Cart is empty</h2>
+</ng-template>
+<app-popup *ngIf="submitted" ></app-popup>

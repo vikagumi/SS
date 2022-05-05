@@ -1,0 +1,17 @@
+<nav class="navbar">
+  <h1>
+    <a routerLink= "/">JustShop</a> 
+  </h1>
+  <ul>
+    <li routerLinkActive= "active">
+      <a [routerLink]= "['/goods']">Goods</a>
+    </li>
+    <li routerLinkActive= "active">
+      <div class="cart">
+        <a [routerLink]="['/cart']">Cart</a>
+        <span *ngIf="totalPrice !==0">{{ totalPrice }}</span>
+      </div>
+    </li>
+  </ul>
+</nav>
+<router-outlet></router-outlet>

@@ -1,0 +1,9 @@
+<div class="goods">
+  <mat-card class="goods-item" *ngFor="let item of goods">
+    <img  src="{{item.img}}" alt="picture" mat-card-image>
+    <mat-card-title>{{item.name}}</mat-card-title>
+    <mat-card-subtitle> {{item.price}} $</mat-card-subtitle>
+    <button mat-raised-button color="primary" (click) ="addProduct(item)">Buy</button>
+
+  </mat-card>
+</div>
